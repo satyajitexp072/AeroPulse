@@ -1,0 +1,28 @@
+{
+  "name": "airfare-index-backend",
+  "version": "0.1.0",
+  "description": "Backend service for SIH26056 Real-time Airfare Price Index",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "npm run test:all",
+    "test:all": "node tests/test_cpi_monitoring_suite.js && node tests/test_event_intelligence_suite.js && node tests/test_forecast_suite.js && node tests/test_hhi_competition_suite.js && node tests/test_event_calendar_suite.js && node tests/test_coverage_suite.js",
+    "test:cpi": "node tests/test_cpi_monitoring_suite.js",
+    "test:intel": "node tests/test_event_intelligence_suite.js",
+    "test:forecast": "node tests/test_forecast_suite.js",
+    "test:hhi": "node tests/test_hhi_competition_suite.js",
+    "test:calendar": "node tests/test_event_calendar_suite.js",
+    "test:coverage": "node tests/test_coverage_suite.js",
+    "build": "npx playwright install chromium",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.5",
+    "playwright": "^1.62.1",
+    "xlsx": "^0.18.5"
+  }
+}

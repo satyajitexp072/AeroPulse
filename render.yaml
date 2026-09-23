@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: aeropulse-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install && npx playwright install --with-deps chromium
+    startCommand: node src/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: SCRAPE_ENABLED
+        value: "false"
+      - key: SCRAPE_PLATFORM
+        value: INDIGO
+      - key: CORS_ORIGIN
+        value: "*"
+      - key: MONGODB_URI
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
