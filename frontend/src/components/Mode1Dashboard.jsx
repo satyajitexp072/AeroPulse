@@ -39,10 +39,20 @@ export const Mode1Dashboard = ({
   error,
   onRefresh,
   onSilentRefresh,
+  initialTab = "overview",
+  initialRoute = "DEL-BOM",
 }) => {
-  // Active Navigation Tab: Defaults to 'overview'
-  const [activeNavTab, setActiveNavTab] = useState("overview");
-  const [selectedCorridor, setSelectedCorridor] = useState("DEL-BOM");
+  // Active Navigation Tab: Defaults to initialTab or 'overview'
+  const [activeNavTab, setActiveNavTab] = useState(initialTab || "overview");
+  const [selectedCorridor, setSelectedCorridor] = useState(initialRoute || "DEL-BOM");
+
+  useEffect(() => {
+    if (initialTab) setActiveNavTab(initialTab);
+  }, [initialTab]);
+
+  useEffect(() => {
+    if (initialRoute) setSelectedCorridor(initialRoute);
+  }, [initialRoute]);
 
   const handleNavigateToRoute = (route) => {
     if (route) setSelectedCorridor(route);

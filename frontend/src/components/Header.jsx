@@ -19,11 +19,12 @@ export const Header = ({
   currentMode = "MODE_1",
   onOpenDemoAnalysis,
   onReturnToPrimary,
+  onNavigateHome,
 }) => {
   return (
     <header className="dashboard-header-institutional">
       {/* 1. Left: Institutional Brand Identity */}
-      <div className="gov-header-brand">
+      <div className="gov-header-brand" onClick={onNavigateHome} style={{ cursor: onNavigateHome ? "pointer" : "default" }} title={onNavigateHome ? "Return to Public Home Portal" : "AeroPulse"}>
         <div className="gov-emblem-badge">
           <Plane size={22} className="gov-plane-icon" />
         </div>
@@ -60,6 +61,17 @@ export const Header = ({
 
       {/* 3. Right: Secondary Actions */}
       <div className="gov-header-actions-right">
+        {onNavigateHome && (
+          <button
+            type="button"
+            className="btn-gov-secondary"
+            onClick={onNavigateHome}
+            title="Return to Public Information Portal"
+          >
+            <ArrowLeft size={14} />
+            <span>Home Portal</span>
+          </button>
+        )}
         {currentMode === "MODE_2" ? (
           <button
             type="button"
