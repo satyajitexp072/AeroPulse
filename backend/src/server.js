@@ -52,6 +52,7 @@ import {
   runMode1ScrapeSweep,
   startMode1Collector,
   stopMode1Collector,
+  initMode1Collector,
   addMode1SSEClient,
   removeMode1SSEClient,
 } from "./scrapers/mode1/mode1Scheduler.js";
@@ -84,9 +85,10 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Initialize Database Connection & Background Scheduler
+// Initialize Database Connection & Background Schedulers
 connectDB();
 initScheduler();
+initMode1Collector();
 
 // Mode 1 operates strictly on genuine REAL_SCRAPED airfare observations
 console.log("[Server] Mode 1 configured for 100% REAL_SCRAPED airfare observations (synthetic seeder disabled).");
@@ -1322,6 +1324,7 @@ server.on("error", (err) => {
 const handleGracefulShutdown = (signal) => {
   console.log(`[Server] Received ${signal}. Shutting down gracefully...`);
   stopScheduler();
+  stopMode1Collector();
   server.close(() => {
     console.log("[Server] HTTP server closed.");
     mongoose.connection.close(false, () => {
